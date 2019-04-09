@@ -1,0 +1,372 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D67B7324225CBA2700D755BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67B7323225CBA2700D755BB /* AppDelegate.swift */; };
+		D67B732B225CBA3E00D755BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D67B732A225CBA3E00D755BB /* Assets.xcassets */; };
+		D67B732E225CBA3E00D755BB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D67B732C225CBA3E00D755BB /* LaunchScreen.storyboard */; };
+		D67B7337225CD4D500D755BB /* BVCameraPreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67B7335225CD4D500D755BB /* BVCameraPreviewController.swift */; };
+		D67B7338225CD4D500D755BB /* BVCameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67B7336225CD4D500D755BB /* BVCameraController.swift */; };
+		D67B733F225CD4DD00D755BB /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67B733B225CD4DD00D755BB /* UIView+Extension.swift */; };
+		D67B7340225CD4DD00D755BB /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67B733D225CD4DD00D755BB /* CameraManager.swift */; };
+		D67B7341225CD4DD00D755BB /* BVCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67B733E225CD4DD00D755BB /* BVCameraView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		D67B7320225CBA2700D755BB /* BoomerangVideo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoomerangVideo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D67B7323225CBA2700D755BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		D67B732A225CBA3E00D755BB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D67B732D225CBA3E00D755BB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D67B732F225CBA3E00D755BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D67B7335225CD4D500D755BB /* BVCameraPreviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BVCameraPreviewController.swift; sourceTree = "<group>"; };
+		D67B7336225CD4D500D755BB /* BVCameraController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BVCameraController.swift; sourceTree = "<group>"; };
+		D67B733B225CD4DD00D755BB /* UIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		D67B733D225CD4DD00D755BB /* CameraManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
+		D67B733E225CD4DD00D755BB /* BVCameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BVCameraView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D67B731D225CBA2700D755BB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D67B7317225CBA2700D755BB = {
+			isa = PBXGroup;
+			children = (
+				D67B7322225CBA2700D755BB /* BoomerangVideo */,
+				D67B7321225CBA2700D755BB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D67B7321225CBA2700D755BB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D67B7320225CBA2700D755BB /* BoomerangVideo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D67B7322225CBA2700D755BB /* BoomerangVideo */ = {
+			isa = PBXGroup;
+			children = (
+				D67B7339225CD4DD00D755BB /* Source */,
+				D67B7323225CBA2700D755BB /* AppDelegate.swift */,
+				D67B7336225CD4D500D755BB /* BVCameraController.swift */,
+				D67B7335225CD4D500D755BB /* BVCameraPreviewController.swift */,
+				D67B732A225CBA3E00D755BB /* Assets.xcassets */,
+				D67B732C225CBA3E00D755BB /* LaunchScreen.storyboard */,
+				D67B732F225CBA3E00D755BB /* Info.plist */,
+			);
+			path = BoomerangVideo;
+			sourceTree = "<group>";
+		};
+		D67B7339225CD4DD00D755BB /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				D67B733A225CD4DD00D755BB /* Extension */,
+				D67B733C225CD4DD00D755BB /* Camera Manager */,
+				D67B733E225CD4DD00D755BB /* BVCameraView.swift */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		D67B733A225CD4DD00D755BB /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				D67B733B225CD4DD00D755BB /* UIView+Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		D67B733C225CD4DD00D755BB /* Camera Manager */ = {
+			isa = PBXGroup;
+			children = (
+				D67B733D225CD4DD00D755BB /* CameraManager.swift */,
+			);
+			path = "Camera Manager";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D67B731F225CBA2700D755BB /* BoomerangVideo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D67B7332225CBA3E00D755BB /* Build configuration list for PBXNativeTarget "BoomerangVideo" */;
+			buildPhases = (
+				D67B731C225CBA2700D755BB /* Sources */,
+				D67B731D225CBA2700D755BB /* Frameworks */,
+				D67B731E225CBA2700D755BB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BoomerangVideo;
+			productName = BoomerangVideo;
+			productReference = D67B7320225CBA2700D755BB /* BoomerangVideo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D67B7318225CBA2700D755BB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = BV;
+				LastSwiftUpdateCheck = 1010;
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = DrawRect;
+				TargetAttributes = {
+					D67B731F225CBA2700D755BB = {
+						CreatedOnToolsVersion = 10.1;
+					};
+				};
+			};
+			buildConfigurationList = D67B731B225CBA2700D755BB /* Build configuration list for PBXProject "BoomerangVideo" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D67B7317225CBA2700D755BB;
+			productRefGroup = D67B7321225CBA2700D755BB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D67B731F225CBA2700D755BB /* BoomerangVideo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D67B731E225CBA2700D755BB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D67B732E225CBA3E00D755BB /* LaunchScreen.storyboard in Resources */,
+				D67B732B225CBA3E00D755BB /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D67B731C225CBA2700D755BB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D67B7324225CBA2700D755BB /* AppDelegate.swift in Sources */,
+				D67B7338225CD4D500D755BB /* BVCameraController.swift in Sources */,
+				D67B733F225CD4DD00D755BB /* UIView+Extension.swift in Sources */,
+				D67B7341225CD4DD00D755BB /* BVCameraView.swift in Sources */,
+				D67B7337225CD4D500D755BB /* BVCameraPreviewController.swift in Sources */,
+				D67B7340225CD4DD00D755BB /* CameraManager.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		D67B732C225CBA3E00D755BB /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D67B732D225CBA3E00D755BB /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D67B7330225CBA3E00D755BB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		D67B7331225CBA3E00D755BB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D67B7333225CBA3E00D755BB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = FLQ72JV77K;
+				INFOPLIST_FILE = BoomerangVideo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.drawrect.boomerangvideo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D67B7334225CBA3E00D755BB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = FLQ72JV77K;
+				INFOPLIST_FILE = BoomerangVideo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.drawrect.boomerangvideo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D67B731B225CBA2700D755BB /* Build configuration list for PBXProject "BoomerangVideo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D67B7330225CBA3E00D755BB /* Debug */,
+				D67B7331225CBA3E00D755BB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D67B7332225CBA3E00D755BB /* Build configuration list for PBXNativeTarget "BoomerangVideo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D67B7333225CBA3E00D755BB /* Debug */,
+				D67B7334225CBA3E00D755BB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D67B7318225CBA2700D755BB /* Project object */;
+}
