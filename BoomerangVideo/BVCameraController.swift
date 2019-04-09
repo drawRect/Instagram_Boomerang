@@ -2,7 +2,7 @@
 //  BVCameraController.swift
 //  BoomerangVideo
 //
-//  Created by Sonata on 09/04/19.
+//  Created by Boominadha Prakash on 09/04/19.
 //  Copyright © 2019 DrawRect. All rights reserved.
 //
 
@@ -10,7 +10,7 @@ import UIKit
 
 class BVCameraController: UIViewController {
 
-    let cameraView = BVCameraView(frame: UIScreen.main.bounds)
+    let bvCameraView = BVCameraView(frame: UIScreen.main.bounds)
     lazy var cameraManager: CameraManager = {
         let cm = CameraManager()
         cm.shouldEnableExposure = true
@@ -23,7 +23,7 @@ class BVCameraController: UIViewController {
     var statusBarShouldBeHidden = false
     
     override func loadView() {
-        view = cameraView
+        view = bvCameraView
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,6 +76,6 @@ extension BVCameraController {
         })
     }
     func addCamera() {
-        cameraManager.addPreviewLayerToView(cameraView.cameraView, newCameraOutputMode: CameraOutputMode.stillImage)
+        cameraManager.addPreviewLayerToView(bvCameraView.cameraView, newCameraOutputMode: CameraOutputMode.stillImage)
     }
 }

@@ -2,7 +2,7 @@
 //  IGCameraView.swift
 //  IGBoomerang
 //
-//  Created by Sonata on 09/04/19.
+//  Created by Boominadha Prakash on 09/04/19.
 //  Copyright © 2019 DrawRect. All rights reserved.
 //
 
