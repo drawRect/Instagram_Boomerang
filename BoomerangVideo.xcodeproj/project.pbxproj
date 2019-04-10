@@ -13,8 +13,8 @@
 		D67B7337225CD4D500D755BB /* BVCameraPreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67B7335225CD4D500D755BB /* BVCameraPreviewController.swift */; };
 		D67B7338225CD4D500D755BB /* BVCameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67B7336225CD4D500D755BB /* BVCameraController.swift */; };
 		D67B733F225CD4DD00D755BB /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67B733B225CD4DD00D755BB /* UIView+Extension.swift */; };
-		D67B7340225CD4DD00D755BB /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67B733D225CD4DD00D755BB /* CameraManager.swift */; };
 		D67B7341225CD4DD00D755BB /* BVCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67B733E225CD4DD00D755BB /* BVCameraView.swift */; };
+		D67B7345225DDE4A00D755BB /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67B7344225DDE4900D755BB /* CameraManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,8 +26,8 @@
 		D67B7335225CD4D500D755BB /* BVCameraPreviewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BVCameraPreviewController.swift; sourceTree = "<group>"; };
 		D67B7336225CD4D500D755BB /* BVCameraController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BVCameraController.swift; sourceTree = "<group>"; };
 		D67B733B225CD4DD00D755BB /* UIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
-		D67B733D225CD4DD00D755BB /* CameraManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
 		D67B733E225CD4DD00D755BB /* BVCameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BVCameraView.swift; sourceTree = "<group>"; };
+		D67B7344225DDE4900D755BB /* CameraManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,7 +92,7 @@
 		D67B733C225CD4DD00D755BB /* Camera Manager */ = {
 			isa = PBXGroup;
 			children = (
-				D67B733D225CD4DD00D755BB /* CameraManager.swift */,
+				D67B7344225DDE4900D755BB /* CameraManager.swift */,
 			);
 			path = "Camera Manager";
 			sourceTree = "<group>";
@@ -169,11 +169,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				D67B7324225CBA2700D755BB /* AppDelegate.swift in Sources */,
+				D67B7345225DDE4A00D755BB /* CameraManager.swift in Sources */,
 				D67B7338225CD4D500D755BB /* BVCameraController.swift in Sources */,
 				D67B733F225CD4DD00D755BB /* UIView+Extension.swift in Sources */,
 				D67B7341225CD4DD00D755BB /* BVCameraView.swift in Sources */,
 				D67B7337225CD4D500D755BB /* BVCameraPreviewController.swift in Sources */,
-				D67B7340225CD4DD00D755BB /* CameraManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

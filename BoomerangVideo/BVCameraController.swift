@@ -18,6 +18,8 @@ class BVCameraController: UIViewController {
         cm.showAccessPermissionPopupAutomatically = false
         cm.cameraOutputQuality = CameraOutputQuality.high
         cm.flashMode = CameraFlashMode.auto
+        cm.burstModeEnabled = true
+        cm.burstModePictureCount = 4
         return cm
     }()
     var statusBarShouldBeHidden = false
@@ -29,18 +31,29 @@ class BVCameraController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         cameraStatusCheck()
+        bvCameraView.cameraButton.addTarget(self, action: #selector(takePicture(sender:)), for: .touchUpInside)
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.isNavigationBarHidden = true
         cameraManager.resumeCaptureSession()
         statusBarShouldBeHidden = true
         UIView.animate(withDuration: 0.25) {
             self.setNeedsStatusBarAppearanceUpdate()
         }
     }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.view.setNeedsLayout()
+    }
     override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         cameraManager.stopCaptureSession()
     }
+//    override func viewDidLayoutSubviews() {
+//        bvCameraView.cameraButtonView.makeRound(with: bvCameraView.cameraButtonView.frame.width/2, borderWidth: 3, borderColor: .white)
+//        bvCameraView.cameraButton.makeRound(with: bvCameraView.cameraButton.frame.width/2, borderWidth: 0, borderColor: .clear)
+//    }
     deinit {
         if cameraManager.captureSession?.isRunning == true {
             cameraManager.stopCaptureSession()
@@ -77,5 +90,26 @@ extension BVCameraController {
     }
     func addCamera() {
         cameraManager.addPreviewLayerToView(bvCameraView.cameraView, newCameraOutputMode: CameraOutputMode.stillImage)
+    }
+    @objc func takePicture(sender: UIButton) {
+        switch cameraManager.cameraOutputMode {
+        case .stillImage:
+            cameraManager.capturePictureWithCompletion { (result) in
+                switch result {
+                case .failure(let error):
+                    self.cameraManager.showErrorBlock("Error occurred", "\(error)")
+                case .success(content: let content):
+                    if let imageArray = content.asArrayOfImages {
+                        DispatchQueue.main.async {
+                            let cameraPreviewVC = BVCameraPreviewController()
+                            cameraPreviewVC.arrayOfImages = imageArray
+                            self.navigationController?.pushViewController(cameraPreviewVC, animated: false)
+                        }
+                    }
+                }
+            }
+        default:
+            break
+        }
     }
 }

@@ -29,6 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate {
     func setUpRootScene() {
         let cc = BVCameraController()
-        window.rootViewController = cc
+        let navController = UINavigationController(rootViewController: cc)
+        navController.isNavigationBarHidden = true
+        window.rootViewController = navController
     }
 }
