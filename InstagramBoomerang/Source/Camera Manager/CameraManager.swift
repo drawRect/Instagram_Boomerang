@@ -576,7 +576,7 @@ open class CameraManager: NSObject, AVCaptureFileOutputRecordingDelegate, UIGest
             }
             self.processBurstModeImages(images: images, imageCompletion: imageCompletion)
         }*/
-        self.capturePicutureContinuously { (result) in
+        self.capturePictureContinuously { (result) in
             guard let images = result.imageArray else {
                 if case let .failure(error) = result {
                     imageCompletion(.failure(error))
@@ -797,7 +797,7 @@ open class CameraManager: NSObject, AVCaptureFileOutputRecordingDelegate, UIGest
         })
     }
     
-    open func capturePicutureContinuously(_ imageCompletion: @escaping (CaptureResult) -> Void) {
+    open func capturePictureContinuously(_ imageCompletion: @escaping (CaptureResult) -> Void) {
         guard cameraIsSetup else {
             _show(NSLocalizedString("No capture session setup", comment:""), message: NSLocalizedString("I can't take any picture", comment:""))
             return
@@ -820,15 +820,21 @@ open class CameraManager: NSObject, AVCaptureFileOutputRecordingDelegate, UIGest
                 if connection.isVideoOrientationSupported {
                     connection.videoOrientation = self._currentCaptureVideoOrientation()
                 }
+                var timerCount = 0.1
                 self.timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { (newTimer) in
                     self.captureState = .inprogress
-                    print("NewTimer timeinterval", newTimer.timeInterval)
-                    if newTimer.timeInterval == 1.0 {
+                    stillImageOutput.capturePhoto(with: self.captureSettings ?? AVCapturePhotoSettings(), delegate: self)
+                    timerCount += newTimer.timeInterval
+                    self._updateIlluminationMode(self.flashMode)
+                    if timerCount == 1.0 {
                         self.timer?.invalidate()
                         self.captureState = .end
+                        newTimer.invalidate()
+                    }else {
+                        newTimer.fire()
                     }
-                    stillImageOutput.capturePhoto(with: self.captureSettings ?? AVCapturePhotoSettings(), delegate: self)
                 })
+                self.timer?.fire()
                 self.imageCompletionBlock = imageCompletion
             } else {
                 imageCompletion(.failure(CaptureError.noVideoConnection))
