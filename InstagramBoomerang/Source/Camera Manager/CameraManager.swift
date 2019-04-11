@@ -76,6 +76,11 @@ public enum CaptureContent {
     case arrayOfImages([UIImage])
 }
 
+public enum CaptureState {
+    case inprogress
+    case end
+    case undefined
+}
 extension CaptureContent {
 
     public var asImage: UIImage? {
@@ -394,6 +399,8 @@ open class CameraManager: NSObject, AVCaptureFileOutputRecordingDelegate, UIGest
     fileprivate var imageCompletionBlock: (CaptureResult) -> Void = {_ in}
     
     fileprivate var expectedPhotoCount: Int = 0
+    fileprivate var timer: Timer?
+    fileprivate var captureState: CaptureState = .undefined
     
     // MARK: - CameraManager
     
@@ -558,7 +565,18 @@ open class CameraManager: NSObject, AVCaptureFileOutputRecordingDelegate, UIGest
         }
     }
     fileprivate func captureBurstModePicture(withCompletion imageCompletion: @escaping(CaptureResult) -> Void) {
-        self.capturePicutureInBurstMode { (result) in
+        /*self.capturePicutureInBurstMode { (result) in
+            guard let images = result.imageArray else {
+                if case let .failure(error) = result {
+                    imageCompletion(.failure(error))
+                } else {
+                    imageCompletion(.failure(CaptureError.noImageData))
+                }
+                return
+            }
+            self.processBurstModeImages(images: images, imageCompletion: imageCompletion)
+        }*/
+        self.capturePicutureContinuously { (result) in
             guard let images = result.imageArray else {
                 if case let .failure(error) = result {
                     imageCompletion(.failure(error))
@@ -772,6 +790,45 @@ open class CameraManager: NSObject, AVCaptureFileOutputRecordingDelegate, UIGest
                 self.captureBracketSettings = AVCapturePhotoBracketSettings(rawPixelFormatType: 0, processedFormat: [AVVideoCodecKey: AVVideoCodecType.hevc], bracketedSettings: exposureSettings)
                 self.captureBracketSettings?.isLensStabilizationEnabled = stillImageOutput.isLensStabilizationDuringBracketedCaptureSupported
                 stillImageOutput.capturePhoto(with: self.captureBracketSettings!, delegate: self)
+                self.imageCompletionBlock = imageCompletion
+            } else {
+                imageCompletion(.failure(CaptureError.noVideoConnection))
+            }
+        })
+    }
+    
+    open func capturePicutureContinuously(_ imageCompletion: @escaping (CaptureResult) -> Void) {
+        guard cameraIsSetup else {
+            _show(NSLocalizedString("No capture session setup", comment:""), message: NSLocalizedString("I can't take any picture", comment:""))
+            return
+        }
+        
+        guard cameraOutputMode == .stillImage else {
+            _show(NSLocalizedString("Capture session output mode video", comment:""), message: NSLocalizedString("I can't take any picture", comment:""))
+            return
+        }
+        
+        _updateIlluminationMode(flashMode)
+        sessionQueue.async(execute: {
+            let stillImageOutput = self._getStillImageOutput()
+            if let connection = stillImageOutput.connection(with: AVMediaType.video),
+                connection.isEnabled {
+                if self.cameraDevice == CameraDevice.front && connection.isVideoMirroringSupported &&
+                    self.shouldFlipFrontCameraImage {
+                    connection.isVideoMirrored = true
+                }
+                if connection.isVideoOrientationSupported {
+                    connection.videoOrientation = self._currentCaptureVideoOrientation()
+                }
+                self.timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { (newTimer) in
+                    self.captureState = .inprogress
+                    print("NewTimer timeinterval", newTimer.timeInterval)
+                    if newTimer.timeInterval == 1.0 {
+                        self.timer?.invalidate()
+                        self.captureState = .end
+                    }
+                    stillImageOutput.capturePhoto(with: self.captureSettings ?? AVCapturePhotoSettings(), delegate: self)
+                })
                 self.imageCompletionBlock = imageCompletion
             } else {
                 imageCompletion(.failure(CaptureError.noVideoConnection))
@@ -1962,7 +2019,6 @@ open class CameraManager: NSObject, AVCaptureFileOutputRecordingDelegate, UIGest
             }
         }
     }
-    
     fileprivate func _updateCameraQualityMode(_ newCameraOutputQuality: CameraOutputQuality) {
         if let validCaptureSession = captureSession {
             var sessionPreset = AVCaptureSession.Preset.low
@@ -2202,11 +2258,6 @@ extension PHPhotoLibrary {
 
 extension CameraManager : AVCapturePhotoCaptureDelegate {
     public func photoOutput(_ output: AVCapturePhotoOutput, didCapturePhotoFor resolvedSettings: AVCaptureResolvedPhotoSettings) {
-        if burstModeEnabled {
-            if self.animateShutter {
-                self._performShutterAnimation(nil)
-            }
-        }
         self.expectedPhotoCount = resolvedSettings.expectedPhotoCount
     }
     public func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
@@ -2215,14 +2266,17 @@ extension CameraManager : AVCapturePhotoCaptureDelegate {
             self.imageCompletionBlock(.failure(error))
         }
         if let dataImage = photo.fileDataRepresentation() {
-            if burstModeEnabled {
+            if burstModeEnabled, captureState == .inprogress {
                 guard let img = UIImage(data: dataImage) else {
                     debugPrint("burst mode data conversion error")
                     return
                 }
+                if self.animateShutter {
+                    self._performShutterAnimation(nil)
+                }
                 let resultImage = UIImage(cgImage: img.cgImage!, scale: 1.0, orientation: .right)
                 self.capturedImages.append(resultImage)
-                if photo.photoCount == self.expectedPhotoCount {
+                if captureState == .end {
                     self.imageCompletionBlock(.success(content: .arrayOfImages(self.capturedImages)))
                 }
             }else {
