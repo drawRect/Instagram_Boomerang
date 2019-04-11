@@ -17,50 +17,24 @@ class IGCameraPreviewController: UIViewController, ActivityViewPresenter {
         iv.contentMode = .scaleAspectFit
         return iv
     }()
-    var player: AVPlayer?
-    private var playerLayer: AVPlayerLayer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        showVideo()
+        self.view.addSubview(imageView)
+        showAnimatedImages()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = false
     }
-    deinit {
-        player?.pause()
-        player = nil
-        playerLayer = nil
-        NotificationCenter.default.removeObserver(self)
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        imageView.stopAnimating()
     }
-    func showVideo() {
-        presentActivityView()
-        VideoGenerator.current.generate(withImages: arrayOfImages, andAudios: [], andType: VideoGenerator.VideoGeneratorType.multiple, { (progress) in
-            //
-        }, success: { url in
-            self.dismissActivityView()
-            let asset = AVAsset(url: url)
-            let item = AVPlayerItem(asset: asset)
-            self.player = AVPlayer(playerItem: item)
-            self.playerLayer = AVPlayerLayer(player: self.player)
-            DispatchQueue.main.async {
-                if let avPlayer = self.player, let pLayer = self.playerLayer {
-                    pLayer.videoGravity = .resizeAspectFill
-                    pLayer.frame = self.view.bounds
-                    self.view.layer.addSublayer(pLayer)
-                    avPlayer.play()
-                    self.loopVideo(videoPlayer: avPlayer)
-                }
-            }
-        }) { error in
-            debugPrint("Video generator error: \(error)")
-        }
-    }
-    func loopVideo(videoPlayer: AVPlayer) {
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil, queue: nil) { notification in
-            videoPlayer.seek(to: CMTime.zero)
-            videoPlayer.play()
-        }
+    func showAnimatedImages() {
+        let totalImages = arrayOfImages + arrayOfImages.reversed()
+        let animatedImages = UIImage.animatedImage(with: totalImages, duration: 1.0)
+        imageView.image = animatedImages
+        imageView.startAnimating()
     }
 }

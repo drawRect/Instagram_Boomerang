@@ -16,15 +16,11 @@
 		D67B7341225CD4DD00D755BB /* IGCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67B733E225CD4DD00D755BB /* IGCameraView.swift */; };
 		D67B7345225DDE4A00D755BB /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67B7344225DDE4900D755BB /* CameraManager.swift */; };
 		D67B7347225F280C00D755BB /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67B7346225F280C00D755BB /* UIImage+Extension.swift */; };
-		D67B7352225F584300D755BB /* AVAssetExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67B734D225F584200D755BB /* AVAssetExtension.swift */; };
-		D67B7353225F584300D755BB /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67B734E225F584200D755BB /* ImageExtension.swift */; };
-		D67B7354225F584300D755BB /* VideoGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67B734F225F584300D755BB /* VideoGenerator.swift */; };
-		D67B7355225F584300D755BB /* VideoGeneratorError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67B7351225F584300D755BB /* VideoGeneratorError.swift */; };
 		D67B7358225F626300D755BB /* ActivityViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67B7357225F626300D755BB /* ActivityViewPresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D67B7320225CBA2700D755BB /* Instagram_Boomerang.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instagram_Boomerang.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D67B7320225CBA2700D755BB /* InstagramBoomerang.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstagramBoomerang.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D67B7323225CBA2700D755BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D67B732A225CBA3E00D755BB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D67B732D225CBA3E00D755BB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -35,10 +31,6 @@
 		D67B733E225CD4DD00D755BB /* IGCameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGCameraView.swift; sourceTree = "<group>"; };
 		D67B7344225DDE4900D755BB /* CameraManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
 		D67B7346225F280C00D755BB /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
-		D67B734D225F584200D755BB /* AVAssetExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVAssetExtension.swift; sourceTree = "<group>"; };
-		D67B734E225F584200D755BB /* ImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageExtension.swift; sourceTree = "<group>"; };
-		D67B734F225F584300D755BB /* VideoGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoGenerator.swift; sourceTree = "<group>"; };
-		D67B7351225F584300D755BB /* VideoGeneratorError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoGeneratorError.swift; sourceTree = "<group>"; };
 		D67B7357225F626300D755BB /* ActivityViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewPresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -64,7 +56,7 @@
 		D67B7321225CBA2700D755BB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D67B7320225CBA2700D755BB /* Instagram_Boomerang.app */,
+				D67B7320225CBA2700D755BB /* InstagramBoomerang.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -87,7 +79,6 @@
 		D67B7339225CD4DD00D755BB /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				D67B734B225F582F00D755BB /* VideoGenerator */,
 				D67B733A225CD4DD00D755BB /* Extension */,
 				D67B733C225CD4DD00D755BB /* Camera Manager */,
 				D67B733E225CD4DD00D755BB /* IGCameraView.swift */,
@@ -112,33 +103,6 @@
 			path = "Camera Manager";
 			sourceTree = "<group>";
 		};
-		D67B734B225F582F00D755BB /* VideoGenerator */ = {
-			isa = PBXGroup;
-			children = (
-				D67B7350225F584300D755BB /* Error */,
-				D67B734C225F584200D755BB /* Extensions */,
-				D67B734F225F584300D755BB /* VideoGenerator.swift */,
-			);
-			path = VideoGenerator;
-			sourceTree = "<group>";
-		};
-		D67B734C225F584200D755BB /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				D67B734D225F584200D755BB /* AVAssetExtension.swift */,
-				D67B734E225F584200D755BB /* ImageExtension.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
-		D67B7350225F584300D755BB /* Error */ = {
-			isa = PBXGroup;
-			children = (
-				D67B7351225F584300D755BB /* VideoGeneratorError.swift */,
-			);
-			path = Error;
-			sourceTree = "<group>";
-		};
 		D67B7356225F621600D755BB /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -150,9 +114,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D67B731F225CBA2700D755BB /* Instagram_Boomerang */ = {
+		D67B731F225CBA2700D755BB /* InstagramBoomerang */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D67B7332225CBA3E00D755BB /* Build configuration list for PBXNativeTarget "Instagram_Boomerang" */;
+			buildConfigurationList = D67B7332225CBA3E00D755BB /* Build configuration list for PBXNativeTarget "InstagramBoomerang" */;
 			buildPhases = (
 				D67B731C225CBA2700D755BB /* Sources */,
 				D67B731D225CBA2700D755BB /* Frameworks */,
@@ -162,9 +126,9 @@
 			);
 			dependencies = (
 			);
-			name = Instagram_Boomerang;
+			name = InstagramBoomerang;
 			productName = BoomerangVideo;
-			productReference = D67B7320225CBA2700D755BB /* Instagram_Boomerang.app */;
+			productReference = D67B7320225CBA2700D755BB /* InstagramBoomerang.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -183,7 +147,7 @@
 					};
 				};
 			};
-			buildConfigurationList = D67B731B225CBA2700D755BB /* Build configuration list for PBXProject "Instagram_Boomerang" */;
+			buildConfigurationList = D67B731B225CBA2700D755BB /* Build configuration list for PBXProject "InstagramBoomerang" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -196,7 +160,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D67B731F225CBA2700D755BB /* Instagram_Boomerang */,
+				D67B731F225CBA2700D755BB /* InstagramBoomerang */,
 			);
 		};
 /* End PBXProject section */
@@ -218,15 +182,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D67B7355225F584300D755BB /* VideoGeneratorError.swift in Sources */,
 				D67B7324225CBA2700D755BB /* AppDelegate.swift in Sources */,
 				D67B7358225F626300D755BB /* ActivityViewPresenter.swift in Sources */,
 				D67B7347225F280C00D755BB /* UIImage+Extension.swift in Sources */,
-				D67B7353225F584300D755BB /* ImageExtension.swift in Sources */,
 				D67B7345225DDE4A00D755BB /* CameraManager.swift in Sources */,
-				D67B7354225F584300D755BB /* VideoGenerator.swift in Sources */,
 				D67B7338225CD4D500D755BB /* IGCameraController.swift in Sources */,
-				D67B7352225F584300D755BB /* AVAssetExtension.swift in Sources */,
 				D67B733F225CD4DD00D755BB /* UIView+Extension.swift in Sources */,
 				D67B7341225CD4DD00D755BB /* IGCameraView.swift in Sources */,
 				D67B7337225CD4D500D755BB /* IGCameraPreviewController.swift in Sources */,
@@ -404,7 +364,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D67B731B225CBA2700D755BB /* Build configuration list for PBXProject "Instagram_Boomerang" */ = {
+		D67B731B225CBA2700D755BB /* Build configuration list for PBXProject "InstagramBoomerang" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D67B7330225CBA3E00D755BB /* Debug */,
@@ -413,7 +373,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D67B7332225CBA3E00D755BB /* Build configuration list for PBXNativeTarget "Instagram_Boomerang" */ = {
+		D67B7332225CBA3E00D755BB /* Build configuration list for PBXNativeTarget "InstagramBoomerang" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D67B7333225CBA3E00D755BB /* Debug */,
