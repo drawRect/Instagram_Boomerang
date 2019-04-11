@@ -1,6 +1,6 @@
 //
 //  BVCameraController.swift
-//  BoomerangVideo
+//  Instagram_Boomerang
 //
 //  Created by Boominadha Prakash on 09/04/19.
 //  Copyright © 2019 DrawRect. All rights reserved.
@@ -8,9 +8,9 @@
 
 import UIKit
 
-class BVCameraController: UIViewController {
+class IGCameraController: UIViewController {
 
-    let bvCameraView = BVCameraView(frame: UIScreen.main.bounds)
+    let igCameraView = IGCameraView(frame: UIScreen.main.bounds)
     lazy var cameraManager: CameraManager = {
         let cm = CameraManager()
         cm.shouldEnableExposure = true
@@ -19,23 +19,24 @@ class BVCameraController: UIViewController {
         cm.cameraOutputQuality = CameraOutputQuality.high
         cm.flashMode = CameraFlashMode.auto
         cm.burstModeEnabled = true
-        cm.burstModePictureCount = 4
+        cm.burstModePictureCount = 4 
         return cm
     }()
     var statusBarShouldBeHidden = false
     
     override func loadView() {
-        view = bvCameraView
+        view = igCameraView
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         cameraStatusCheck()
-        bvCameraView.cameraButton.addTarget(self, action: #selector(takePicture(sender:)), for: .touchUpInside)
+        igCameraView.cameraButton.addTarget(self, action: #selector(takePicture(sender:)), for: .touchUpInside)
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = true
+        igCameraView.cameraButton.isEnabled = true
         cameraManager.resumeCaptureSession()
         statusBarShouldBeHidden = true
         UIView.animate(withDuration: 0.25) {
@@ -50,10 +51,6 @@ class BVCameraController: UIViewController {
         super.viewDidDisappear(animated)
         cameraManager.stopCaptureSession()
     }
-//    override func viewDidLayoutSubviews() {
-//        bvCameraView.cameraButtonView.makeRound(with: bvCameraView.cameraButtonView.frame.width/2, borderWidth: 3, borderColor: .white)
-//        bvCameraView.cameraButton.makeRound(with: bvCameraView.cameraButton.frame.width/2, borderWidth: 0, borderColor: .clear)
-//    }
     deinit {
         if cameraManager.captureSession?.isRunning == true {
             cameraManager.stopCaptureSession()
@@ -64,7 +61,7 @@ class BVCameraController: UIViewController {
     }
 }
 
-extension BVCameraController {
+extension IGCameraController {
     func cameraStatusCheck() {
         switch cameraManager.currentCameraStatus() {
         case .notDetermined:
@@ -89,9 +86,10 @@ extension BVCameraController {
         })
     }
     func addCamera() {
-        cameraManager.addPreviewLayerToView(bvCameraView.cameraView, newCameraOutputMode: CameraOutputMode.stillImage)
+        cameraManager.addPreviewLayerToView(igCameraView.cameraView, newCameraOutputMode: CameraOutputMode.stillImage)
     }
     @objc func takePicture(sender: UIButton) {
+        igCameraView.cameraButton.isEnabled = false
         switch cameraManager.cameraOutputMode {
         case .stillImage:
             cameraManager.capturePictureWithCompletion { (result) in
@@ -101,7 +99,7 @@ extension BVCameraController {
                 case .success(content: let content):
                     if let imageArray = content.asArrayOfImages {
                         DispatchQueue.main.async {
-                            let cameraPreviewVC = BVCameraPreviewController()
+                            let cameraPreviewVC = IGCameraPreviewController()
                             cameraPreviewVC.arrayOfImages = imageArray
                             self.navigationController?.pushViewController(cameraPreviewVC, animated: false)
                         }

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class BVCameraView: UIView {
+class IGCameraView: UIView {
     
     //MARK: - iVars
     lazy var cameraView: UIView = {

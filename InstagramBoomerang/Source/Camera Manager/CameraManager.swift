@@ -567,13 +567,7 @@ open class CameraManager: NSObject, AVCaptureFileOutputRecordingDelegate, UIGest
                 }
                 return
             }
-            if self.animateShutter {
-                self._performShutterAnimation {
-                    self.processBurstModeImages(images: images, imageCompletion: imageCompletion)
-                }
-            } else {
-                self.processBurstModeImages(images: images, imageCompletion: imageCompletion)
-            }
+            self.processBurstModeImages(images: images, imageCompletion: imageCompletion)
         }
     }
     fileprivate func processBurstModeImages(images: [UIImage], imageCompletion: @escaping(CaptureResult) -> Void) {
@@ -2208,6 +2202,11 @@ extension PHPhotoLibrary {
 
 extension CameraManager : AVCapturePhotoCaptureDelegate {
     public func photoOutput(_ output: AVCapturePhotoOutput, didCapturePhotoFor resolvedSettings: AVCaptureResolvedPhotoSettings) {
+        if burstModeEnabled {
+            if self.animateShutter {
+                self._performShutterAnimation(nil)
+            }
+        }
         self.expectedPhotoCount = resolvedSettings.expectedPhotoCount
     }
     public func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
@@ -2216,13 +2215,13 @@ extension CameraManager : AVCapturePhotoCaptureDelegate {
             self.imageCompletionBlock(.failure(error))
         }
         if let dataImage = photo.fileDataRepresentation() {
-            print(UIImage(data: dataImage)?.size as Any)
             if burstModeEnabled {
                 guard let img = UIImage(data: dataImage) else {
                     debugPrint("burst mode data conversion error")
                     return
                 }
-                self.capturedImages.append(img)
+                let resultImage = UIImage(cgImage: img.cgImage!, scale: 1.0, orientation: .right)
+                self.capturedImages.append(resultImage)
                 if photo.photoCount == self.expectedPhotoCount {
                     self.imageCompletionBlock(.success(content: .arrayOfImages(self.capturedImages)))
                 }

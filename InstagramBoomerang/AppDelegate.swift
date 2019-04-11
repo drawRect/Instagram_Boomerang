@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  BoomerangVideo
+//  Instagram_Boomerang
 //
 //  Created by Boominadha Prakash on 09/04/19.
 //  Copyright © 2019 DrawRect. All rights reserved.
@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate {
     func setUpRootScene() {
-        let cc = BVCameraController()
+        let cc = IGCameraController()
         let navController = UINavigationController(rootViewController: cc)
         navController.isNavigationBarHidden = true
         window.rootViewController = navController
