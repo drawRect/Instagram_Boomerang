@@ -348,6 +348,8 @@ open class CameraManager: NSObject, AVCaptureFileOutputRecordingDelegate, UIGest
     /// Property to enable or disable burstMode
     open var burstModeEnabled = false
     
+    open var expectedPhotosCount = 10
+    
     // MARK: - Private properties
     
     fileprivate var locationManager: CameraLocationManager?
@@ -767,20 +769,23 @@ open class CameraManager: NSObject, AVCaptureFileOutputRecordingDelegate, UIGest
                     connection.videoOrientation = self._currentCaptureVideoOrientation()
                 }
                 self.imageCompletionBlock = imageCompletion
-                for i in 1...10 {
-                    if i < 9 {
-                        self.captureState = .inprogress
-                    }else {
-                        self.captureState = .end
-                    }
+                self.takePicture(execute: {
+                    self.captureState = .inprogress
                     let _captureSettings = AVCapturePhotoSettings.init(from: self.captureSettings!)
                     stillImageOutput.capturePhoto(with: _captureSettings, delegate: self)
-                    usleep(200000) //will sleep for 0.2 second
-                }
+                })
             } else {
                 imageCompletion(.failure(CaptureError.noVideoConnection))
             }
         })
+    }
+    fileprivate func takePicture(execute: @escaping () -> Void) {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.2) { [weak self] in
+            execute()
+            if self?.captureState == .inprogress {
+                self?.takePicture(execute: execute)
+            }
+        }
     }
     /**
      Captures still image from currently running capture session.
@@ -2210,15 +2215,19 @@ extension CameraManager : AVCapturePhotoCaptureDelegate {
             self.imageCompletionBlock(.failure(error))
         }
         if let dataImage = photo.fileDataRepresentation() {
-            if burstModeEnabled, captureState == .inprogress {
-                guard let img = UIImage(data: dataImage) else {
-                    debugPrint("burst mode data conversion error")
-                    return
+            if burstModeEnabled {
+                if self.capturedImages.count <= expectedPhotosCount {
+                    guard let img = UIImage(data: dataImage) else {
+                        debugPrint("burst mode data conversion error")
+                        return
+                    }
+                    self.captureState = .inprogress
+                    let resultImage = UIImage(cgImage: img.cgImage!, scale: 1.0, orientation: .right)
+                    self.capturedImages.append(resultImage)
+                }else {
+                    self.captureState = .end
+                    return self.imageCompletionBlock(.success(content: .arrayOfImages(self.capturedImages)))
                 }
-                let resultImage = UIImage(cgImage: img.cgImage!, scale: 1.0, orientation: .right)
-                self.capturedImages.append(resultImage)
-            }else if burstModeEnabled, captureState == .end {
-                return self.imageCompletionBlock(.success(content: .arrayOfImages(self.capturedImages)))
             }else {
                 let dataProvider = CGDataProvider(data: dataImage as CFData)
                 let cgImageRef: CGImage! = CGImage(jpegDataProviderSource: dataProvider!, decode: nil, shouldInterpolate: true, intent: .defaultIntent)
