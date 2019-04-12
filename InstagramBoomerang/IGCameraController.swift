@@ -19,7 +19,6 @@ class IGCameraController: UIViewController {
         cm.cameraOutputQuality = CameraOutputQuality.high
         cm.flashMode = CameraFlashMode.auto
         cm.burstModeEnabled = true
-        cm.burstModePictureCount = 4 
         return cm
     }()
     var statusBarShouldBeHidden = false
