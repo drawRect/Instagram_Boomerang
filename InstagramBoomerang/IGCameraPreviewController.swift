@@ -1,5 +1,5 @@
 //
-//  BVCameraPreviewController.swift
+//  IGCameraPreviewController.swift
 //  Instagram_Boomerang
 //
 //  Created by Boominadha Prakash on 09/04/19.
@@ -33,7 +33,7 @@ class IGCameraPreviewController: UIViewController, ActivityViewPresenter {
     }
     func showAnimatedImages() {
         let totalImages = arrayOfImages + arrayOfImages.reversed()
-        let animatedImages = UIImage.animatedImage(with: totalImages, duration: 1.0)
+        let animatedImages = UIImage.animatedImage(with: totalImages, duration: 1.5)
         imageView.image = animatedImages
         imageView.startAnimating()
     }
