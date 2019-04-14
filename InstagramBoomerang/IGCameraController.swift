@@ -1,5 +1,5 @@
 //
-//  BVCameraController.swift
+//  IGCameraController.swift
 //  Instagram_Boomerang
 //
 //  Created by Boominadha Prakash on 09/04/19.
@@ -8,8 +8,8 @@
 
 import UIKit
 
-class IGCameraController: UIViewController {
-
+class IGCameraController: UIViewController, CaptureBurstModeDelegate {
+    
     let igCameraView = IGCameraView(frame: UIScreen.main.bounds)
     lazy var cameraManager: CameraManager = {
         let cm = CameraManager()
@@ -36,6 +36,7 @@ class IGCameraController: UIViewController {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = true
         igCameraView.cameraButton.isEnabled = true
+        cameraManager.captureBurstModeDelegate = self
         cameraManager.resumeCaptureSession()
         statusBarShouldBeHidden = true
         UIView.animate(withDuration: 0.25) {
@@ -48,6 +49,7 @@ class IGCameraController: UIViewController {
     }
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        igCameraView.cameraButtonView.stopRotating()
         cameraManager.stopCaptureSession()
     }
     deinit {
@@ -57,6 +59,14 @@ class IGCameraController: UIViewController {
     }
     override var prefersStatusBarHidden: Bool {
         return statusBarShouldBeHidden
+    }
+    
+    func didBurstModeComplete(resultImages: [UIImage]) {
+        DispatchQueue.main.async {
+            let cameraPreviewVC = IGCameraPreviewController()
+            cameraPreviewVC.arrayOfImages = resultImages
+            self.navigationController?.pushViewController(cameraPreviewVC, animated: false)
+        }
     }
 }
 
@@ -88,23 +98,12 @@ extension IGCameraController {
         cameraManager.addPreviewLayerToView(igCameraView.cameraView, newCameraOutputMode: CameraOutputMode.stillImage)
     }
     @objc func takePicture(sender: UIButton) {
-        igCameraView.cameraButton.isEnabled = false
+        self.igCameraView.cameraButton.isEnabled = false
+        self.igCameraView.cameraButtonView.addGradientLayer(with: self.igCameraView.cameraButtonView.frame.width/2, lineWidth: 4)
+        self.igCameraView.cameraButtonView.startRotating()
         switch cameraManager.cameraOutputMode {
         case .stillImage:
-            cameraManager.capturePictureWithCompletion { (result) in
-                switch result {
-                case .failure(let error):
-                    self.cameraManager.showErrorBlock("Error occurred", "\(error)")
-                case .success(content: let content):
-                    if let imageArray = content.asArrayOfImages {
-                        DispatchQueue.main.async {
-                            let cameraPreviewVC = IGCameraPreviewController()
-                            cameraPreviewVC.arrayOfImages = imageArray
-                            self.navigationController?.pushViewController(cameraPreviewVC, animated: false)
-                        }
-                    }
-                }
-            }
+            cameraManager.capturePictureWithBurstMode()
         default:
             break
         }
